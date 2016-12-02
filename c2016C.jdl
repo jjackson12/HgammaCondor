@@ -1,0 +1,13 @@
+universe = vanilla
+Executable = sm2016C.sh 
+Should_Transfer_Files = YES
+WhenToTransferOutput = ON_EXIT
+Notification = Error
+ 
+arguments = $(Process)
+ 
+Output = condorLogs/log.D.stdout
+Error = condorLogs/log.D.stderr
+Log = condorLogs/log.D.condorlog
+Queue 4 
+ 
