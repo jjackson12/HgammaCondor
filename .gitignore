@@ -1,0 +1,6 @@
+*.root
+*_C.d
+*_C.so
+*rdict.pcm
+c*.jdl
+sm*.sh
