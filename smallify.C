@@ -155,8 +155,8 @@ Int_t smallify::Cut(Long64_t entry) {
   jetVec.SetPtEtaPhiE(0,0,0,0);
   for(std::vector<float>::iterator it = ph_pt->begin(); it != ph_pt->end(); ++it) {
     if (*it > 180                && 
-        ( (ph_mvaCat->at(iPh)==0 && ph_mvaVal->at(iPh)>0.374) || 
-          (ph_mvaCat->at(iPh)==1 && ph_mvaVal->at(iPh)>0.336) 
+        ( (ph_mvaCat->at(iPh)==0 && ph_mvaVal->at(iPh)>0.20) || 
+          (ph_mvaCat->at(iPh)==1 && ph_mvaVal->at(iPh)>0.20) 
         )                        && 
         ph_passEleVeto->at(iPh)  &&
         std::abs(ph_eta->at(iPh)) < 2.4
