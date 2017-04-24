@@ -1,17 +1,17 @@
-def makeAllSmallerDirs(configFile):
-  from ConfigParser import RawConfigParser
+def makeAllSmallerDirs(configDict):
   from makeSmallerDirs import breakDirs
-  from pprint import pprint
     
-  config = RawConfigParser()
-  config.optionxform = str
-  config.read(configFile)
-  
-  
-  dirs = dict([key, directory] for key, directory in config.items('dirs'))
-  for dataset in dirs:
+  for dataset in configDict:
     breakDirs(dirs[dataset], dataset)
 
 if __name__ == "__main__":
   from sys import argv
-  makeAllSmallerDirs(argv[1])
+  from ConfigParser import RawConfigParser
+  config = RawConfigParser()
+  config.optionxform = str
+  config.read(argv[1])
+  dirs = dict([key, directory] for key, directory in config.items('dirs'))
+
+  makeAllSmallerDirs(dirs)
+
+
