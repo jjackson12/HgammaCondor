@@ -2,7 +2,7 @@ def makeAllSmallerDirs(configDict):
   from makeSmallerDirs import breakDirs
     
   for dataset in configDict:
-    breakDirs(dirs[dataset], dataset)
+    breakDirs(configDict[dataset], dataset)
 
 if __name__ == "__main__":
   from sys import argv
