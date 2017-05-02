@@ -1,6 +1,7 @@
 from sys import argv
 from os import listdir
 from os.path import isfile, join
+from pprint import pprint
 from ROOT import *
 
 if len(argv) != 3:
@@ -15,9 +16,12 @@ inFiles = []
 for f in listdir(inDirName):
   if isfile(join(inDirName, f)):
     inFiles.append(join(inDirName, f))
+print "inFiles:"
+pprint(inFiles)
 for inFile in inFiles:
   chain.Add(inFile)
-#gSystem.CompileMacro("smallify.C", "gOck")
+print "TChain has NEntries: %i" % chain.GetEntries()
+gSystem.CompileMacro("smallify.C", "gOck")
 gSystem.Load('smallify_C')
 smallifier = smallify(chain)
 smallifier.Loop(outputName)
