@@ -107,6 +107,15 @@ void smallify::Loop(std::string outputFileName) {
   fChain->SetBranchStatus("jetAK8_softdrop_mass"         , 1);
   fChain->SetBranchStatus("jetAK8_softdrop_massCorr"     , 1);
   fChain->SetBranchStatus("jetAK8_softdrop_jec"          , 1);
+  fChain->SetBranchStatus("jetAK8_puppi_pt"                , 1);
+  fChain->SetBranchStatus("jetAK8_puppi_softdrop_mass"     , 1);
+  fChain->SetBranchStatus("jetAK8_puppi_softdrop_massCorr" , 1);
+  fChain->SetBranchStatus("jetAK8_puppi_e"                 , 1);
+  fChain->SetBranchStatus("jetAK8_puppi_eta"               , 1);
+  fChain->SetBranchStatus("jetAK8_puppi_phi"               , 1);
+  fChain->SetBranchStatus("jetAK8_puppi_tau1"              , 1);
+  fChain->SetBranchStatus("jetAK8_puppi_tau2"              , 1);
+  fChain->SetBranchStatus("jetAK8_puppi_tau3 "             , 1);
   fChain->SetBranchStatus("EVENT_event"                  , 1);
   fChain->SetBranchStatus("EVENT_run"                    , 1);
   fChain->SetBranchStatus("EVENT_lumiBlock"              , 1);
