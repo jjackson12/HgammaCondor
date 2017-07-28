@@ -140,15 +140,15 @@ void smallify::Loop(std::string outputFileName) {
       cout.flush();
       cout << fixed << setw(4) << setprecision(2) << (float(jentry)/float(nentries))*100 << "% done: Scanned " << jentry << " events." << '\r';
     }
-    if (useTriggerInfo) {
-      passTrig = false;
-      for(map<string,bool>::iterator it = HLT_isFired->begin(); it != HLT_isFired->end(); ++it) {
-        if (it->first == "HLT_Photon175_v1" || it->first == "HLT_Photon175_v2" ||  it->first == "HLT_Photon175_v3" || "HLT_Photon175_v4" || "HLT_Photon175_v5" ||  it->first =="HLT_Photon165_HE10_v1" ||  it->first =="HLT_Photon165_HE10_v2" ||  it->first =="HLT_Photon165_HE10_v3" || it->first =="HLT_Photon165_HE10_v4"|| it->first =="HLT_Photon165_HE10_v5")  {
-          passTrig |= (1==it->second);
-        }
-      }
-      if (!passTrig) continue;
-    }
+    //if (useTriggerInfo) {
+    //  passTrig = false;
+    //  for(map<string,bool>::iterator it = HLT_isFired->begin(); it != HLT_isFired->end(); ++it) {
+    //    if (it->first == "HLT_Photon175_v1" || it->first == "HLT_Photon175_v2" ||  it->first == "HLT_Photon175_v3" || "HLT_Photon175_v4" || "HLT_Photon175_v5" ||  it->first =="HLT_Photon165_HE10_v1" ||  it->first =="HLT_Photon165_HE10_v2" ||  it->first =="HLT_Photon165_HE10_v3" || it->first =="HLT_Photon165_HE10_v4"|| it->first =="HLT_Photon165_HE10_v5")  {
+    //      passTrig |= (1==it->second);
+    //    }
+    //  }
+    //  if (!passTrig) continue;
+    //}
     if (Cut(ientry) < 0) continue;
     skimTree->Fill();
   }
@@ -161,41 +161,42 @@ Int_t smallify::Cut(Long64_t entry) {
   // returns  1 if entry is accepted.
   // returns -1 otherwise.
   passPh  = false;
-  passJet = false;
+  //passJet = false;
   iPh = 0;
   phVec.SetPtEtaPhiE(0,0,0,0);
   jetVec.SetPtEtaPhiE(0,0,0,0);
   for(std::vector<float>::iterator it = ph_pt->begin(); it != ph_pt->end(); ++it) {
-    if (*it > 180                && 
+    if (*it > 150                && 
         ( (ph_mvaCat->at(iPh)==0 && ph_mvaVal->at(iPh)>0.20) || 
           (ph_mvaCat->at(iPh)==1 && ph_mvaVal->at(iPh)>0.20) 
         )                        && 
         ph_passEleVeto->at(iPh)  &&
-        std::abs(ph_eta->at(iPh)) < 2.4
+        std::abs(ph_eta->at(iPh)) < 1.4442
 
        )  {
       passPh = true;
-      phVec.SetPtEtaPhiE(ph_pt->at(iPh), ph_eta->at(iPh), ph_phi->at(iPh), ph_e->at(iPh));
+      //phVec.SetPtEtaPhiE(ph_pt->at(iPh), ph_eta->at(iPh), ph_phi->at(iPh), ph_e->at(iPh));
 
-      iJet = 0;
-      for(std::vector<float>::iterator jt = jetAK8_pt->begin(); jt != jetAK8_pt->end(); ++jt) {
-        if ( *jt > 200                             && 
-            jetAK8_IDLoose->at(iJet)   //            &&
-            //jetAK8_pruned_massCorr->at(iJet) > 30 
-           ) {
-          passJet = true;
-          jetVec.SetPtEtaPhiE(jetAK8_pt->at(iJet), jetAK8_eta->at(iJet), jetAK8_phi->at(iJet), jetAK8_e->at(iJet));
-          if (phVec.DeltaR(jetVec) < 1.1) {
-            passJet = false;
-          }
-        }
-        if (passJet) break;
-        ++iJet;
-      }
+      //iJet = 0;
+      //for(std::vector<float>::iterator jt = jetAK8_pt->begin(); jt != jetAK8_pt->end(); ++jt) {
+      //  if ( *jt > 200                             && 
+      //      jetAK8_IDLoose->at(iJet)   //            &&
+      //      //jetAK8_pruned_massCorr->at(iJet) > 30 
+      //     ) {
+      //    passJet = true;
+      //    jetVec.SetPtEtaPhiE(jetAK8_pt->at(iJet), jetAK8_eta->at(iJet), jetAK8_phi->at(iJet), jetAK8_e->at(iJet));
+      //    if (phVec.DeltaR(jetVec) < 1.1) {
+      //      passJet = false;
+      //    }
+      //  }
+      //  if (passJet) break;
+      //  ++iJet;
+      //}
 
     }
     ++iPh;
   }
-  if (  passPh && passJet ) return 1;
+  //if (  passPh && passJet ) return 1;
+  if (  passPh  ) return 1;
   else return -1;
 }
