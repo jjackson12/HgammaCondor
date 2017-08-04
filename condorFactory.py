@@ -21,9 +21,9 @@ Notification = Error
 
 arguments = $(Process)
  
-Output = condorLogs/log.%s.stdout
-Error = condorLogs/log.%s.stderr
-Log = condorLogs/log.%s.condorlog
+Output = condorLogs/log.%s.$(Process).stdout
+Error = condorLogs/log.%s.$(Process).stderr
+Log = condorLogs/log.%s.$(Process).condorlog
 
 Queue %i
 """ % (scriptName, scriptName, scriptName, scriptName, queue)
