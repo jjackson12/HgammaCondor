@@ -25,7 +25,7 @@ public :
    Int_t           fCurrent; //!current Tree number in a TChain
 
   long long stopAfter = -1;
-  bool useTriggerInfo = false;
+  bool useTriggerInfo = true;
 
   bool passPh    = false ;
   bool passJet   = false ;

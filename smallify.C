@@ -143,7 +143,8 @@ void smallify::Loop(std::string outputFileName) {
     if (useTriggerInfo) {
       passTrig = false;
       for(map<string,bool>::iterator it = HLT_isFired->begin(); it != HLT_isFired->end(); ++it) {
-        if (it->first == "HLT_Photon175_v1" || it->first == "HLT_Photon175_v2" ||  it->first == "HLT_Photon175_v3" || "HLT_Photon175_v4" || "HLT_Photon175_v5" ||  it->first =="HLT_Photon165_HE10_v1" ||  it->first =="HLT_Photon165_HE10_v2" ||  it->first =="HLT_Photon165_HE10_v3" || it->first =="HLT_Photon165_HE10_v4"|| it->first =="HLT_Photon165_HE10_v5")  {
+        //if (it->first == "HLT_Photon175_v1" || it->first == "HLT_Photon175_v2" ||  it->first == "HLT_Photon175_v3" || "HLT_Photon175_v4" || "HLT_Photon175_v5" ||  it->first =="HLT_Photon165_HE10_v1" ||  it->first =="HLT_Photon165_HE10_v2" ||  it->first =="HLT_Photon165_HE10_v3" || it->first =="HLT_Photon165_HE10_v4"|| it->first =="HLT_Photon165_HE10_v5")  {
+        if (it->first.find("HLT_Photon175_") != string::npos || it->first.find("HLT_Photon165_HE10_") != string::npos) {
           passTrig |= (1==it->second);
         }
       }
@@ -167,12 +168,9 @@ Int_t smallify::Cut(Long64_t entry) {
   jetVec.SetPtEtaPhiE(0,0,0,0);
   for(std::vector<float>::iterator it = ph_pt->begin(); it != ph_pt->end(); ++it) {
     if (*it > 180                && 
-        ( (ph_mvaCat->at(iPh)==0 && ph_mvaVal->at(iPh)>0.20) || 
-          (ph_mvaCat->at(iPh)==1 && ph_mvaVal->at(iPh)>0.20) 
-        )                        && 
+        ph_mvaVal->at(iPh)>0.20  &&
         ph_passEleVeto->at(iPh)  &&
-        std::abs(ph_eta->at(iPh)) < 2.4
-
+        (std::abs(ph_eta->at(iPh)) < 1.4442 || (std::abs(ph_eta->at(iPh)) > 1.566 && std::abs(ph_eta->at(iPh)) < 2.4) )
        )  {
       passPh = true;
       phVec.SetPtEtaPhiE(ph_pt->at(iPh), ph_eta->at(iPh), ph_phi->at(iPh), ph_e->at(iPh));
@@ -180,12 +178,12 @@ Int_t smallify::Cut(Long64_t entry) {
       iJet = 0;
       for(std::vector<float>::iterator jt = jetAK8_pt->begin(); jt != jetAK8_pt->end(); ++jt) {
         if ( *jt > 200                             && 
-            jetAK8_IDLoose->at(iJet)   //            &&
-            //jetAK8_pruned_massCorr->at(iJet) > 30 
+            jetAK8_IDLoose->at(iJet)               &&
+            jetAK8_puppi_softdrop_massCorr->at(iJet) > 30 
            ) {
           passJet = true;
           jetVec.SetPtEtaPhiE(jetAK8_pt->at(iJet), jetAK8_eta->at(iJet), jetAK8_phi->at(iJet), jetAK8_e->at(iJet));
-          if (phVec.DeltaR(jetVec) < 1.1) {
+          if (phVec.DeltaR(jetVec) < 0.8) {
             passJet = false;
           }
         }
