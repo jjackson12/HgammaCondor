@@ -166,7 +166,8 @@ Int_t smallify::Cut(Long64_t entry) {
   phVec.SetPtEtaPhiE(0,0,0,0);
   jetVec.SetPtEtaPhiE(0,0,0,0);
   for(std::vector<float>::iterator it = ph_pt->begin(); it != ph_pt->end(); ++it) {
-    if (*it > 180                && 
+//TODO: I changed this from 180 to 100, which seems like a drastic increase in how much data is being accepted, but my skimming of the MC and data suggests this is best. Can always cut more later 
+   if (*it > 180                 && 
         ( (ph_mvaCat->at(iPh)==0 && ph_mvaVal->at(iPh)>0.20) || 
           (ph_mvaCat->at(iPh)==1 && ph_mvaVal->at(iPh)>0.20) 
         )                        && 

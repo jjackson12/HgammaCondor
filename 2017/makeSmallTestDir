@@ -1,0 +1,7 @@
+#!/bin/bash
+
+for i in {1..100}
+do
+	cp -n /mnt/hadoop/store/user/johakala/SinglePhoton/Hgamma80XTuples_Apr21_singlePhoton2016E/170421_214141/0000/flatTuple_$i.root smallData
+done
+

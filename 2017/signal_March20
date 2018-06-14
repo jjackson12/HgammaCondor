@@ -1,0 +1,41 @@
+[dirs]
+sig_m650       :  /home/hakala/cmssw/CMSSW_8_0_26_patch1/src/VgammaTuplizer/Ntuplizer/Hgamma2016Sig_m200
+sig_m750       :  /home/hakala/cmssw/CMSSW_8_0_26_patch1/src/VgammaTuplizer/Ntuplizer/Hgamma2016Sig_m750
+sig_m850       :  /home/hakala/cmssw/CMSSW_8_0_26_patch1/src/VgammaTuplizer/Ntuplizer/Hgamma2016Sig_m850
+sig_m1000      :  /home/hakala/cmssw/CMSSW_8_0_26_patch1/src/VgammaTuplizer/Ntuplizer/Hgamma2016Sig_m1000
+sig_m1150      :  /home/hakala/cmssw/CMSSW_8_0_26_patch1/src/VgammaTuplizer/Ntuplizer/Hgamma2016Sig_m1150
+sig_m1300      :  /home/hakala/cmssw/CMSSW_8_0_26_patch1/src/VgammaTuplizer/Ntuplizer/Hgamma2016Sig_m1300
+sig_m1450      :  /home/hakala/cmssw/CMSSW_8_0_26_patch1/src/VgammaTuplizer/Ntuplizer/Hgamma2016Sig_m1450
+sig_m1600      :  /home/hakala/cmssw/CMSSW_8_0_26_patch1/src/VgammaTuplizer/Ntuplizer/Hgamma2016Sig_m1600
+sig_m1750      :  /home/hakala/cmssw/CMSSW_8_0_26_patch1/src/VgammaTuplizer/Ntuplizer/Hgamma2016Sig_m1750
+sig_m1900      :  /home/hakala/cmssw/CMSSW_8_0_26_patch1/src/VgammaTuplizer/Ntuplizer/Hgamma2016Sig_m1900
+sig_m2050      :  /home/hakala/cmssw/CMSSW_8_0_26_patch1/src/VgammaTuplizer/Ntuplizer/Hgamma2016Sig_m2050
+sig_m2450      :  /home/hakala/cmssw/CMSSW_8_0_26_patch1/src/VgammaTuplizer/Ntuplizer/Hgamma2016Sig_m2450
+sig_m2850      :  /home/hakala/cmssw/CMSSW_8_0_26_patch1/src/VgammaTuplizer/Ntuplizer/Hgamma2016Sig_m2850
+sig_m3250      :  /home/hakala/cmssw/CMSSW_8_0_26_patch1/src/VgammaTuplizer/Ntuplizer/Hgamma2016Sig_m3250
+
+
+WGammaSig_m1000	: WGammaSig_m1000
+WGammaSig_m1200	: WGammaSig_m1200
+WGammaSig_m1400	: WGammaSig_m1400
+WGammaSig_m1600	: WGammaSig_m1600
+WGammaSig_m1800	: WGammaSig_m1800
+WGammaSig_m2000	: WGammaSig_m2000
+WGammaSig_m200	: WGammaSig_m200
+WGammaSig_m2200	: WGammaSig_m2200
+WGammaSig_m2400	: WGammaSig_m2400
+WGammaSig_m250	: WGammaSig_m250
+WGammaSig_m2600	: WGammaSig_m2600
+WGammaSig_m2800	: WGammaSig_m2800
+WGammaSig_m3000	: WGammaSig_m3000
+WGammaSig_m300	: WGammaSig_m300
+WGammaSig_m3500	: WGammaSig_m3500
+WGammaSig_m350	: WGammaSig_m350
+WGammaSig_m4000	: WGammaSig_m4000
+WGammaSig_m400	: WGammaSig_m400
+WGammaSig_m450	: WGammaSig_m450
+WGammaSig_m500	: WGammaSig_m500
+WGammaSig_m600	: WGammaSig_m600
+WGammaSig_m700	: WGammaSig_m700
+WGammaSig_m800	: WGammaSig_m800
+WGammaSig_m900	: WGammaSig_m900
