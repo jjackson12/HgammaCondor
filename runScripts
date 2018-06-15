@@ -1,0 +1,10 @@
+#!/bin/bash
+
+for script in ./*Jet*.jdl; do
+    eval echo "running $script"
+    eval "condor_submit $script "
+done
+for script in ./*qcd*.jdl; do
+    eval echo "running $script"
+    eval "condor_submit $script "
+done
