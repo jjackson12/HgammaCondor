@@ -120,11 +120,11 @@ public :
    vector<float>   *jetAK8_tau1;
    vector<float>   *jetAK8_tau2;
    vector<float>   *jetAK8_tau3;
-   vector<float>   *jetAK8_pruned_mass;
-   vector<float>   *jetAK8_pruned_massCorr;
-   vector<float>   *jetAK8_pruned_jec;
-   vector<float>   *jetAK8_pruned_jecUp;
-   vector<float>   *jetAK8_pruned_jecDown;
+   vector<float>   *jetAK8_chs_pruned_mass;
+   vector<float>   *jetAK8_chs_pruned_massCorr;
+   vector<float>   *jetAK8_chs_pruned_jec;
+   vector<float>   *jetAK8_chs_pruned_jecUp;
+   vector<float>   *jetAK8_chs_pruned_jecDown;
    vector<float>   *jetAK8_softdrop_mass;
    vector<float>   *jetAK8_softdrop_massCorr;
    vector<float>   *jetAK8_softdrop_jec;
@@ -261,11 +261,11 @@ public :
    TBranch        *b_jetAK8_tau1;   //!
    TBranch        *b_jetAK8_tau2;   //!
    TBranch        *b_jetAK8_tau3;   //!
-   TBranch        *b_jetAK8_pruned_mass;   //!
-   TBranch        *b_jetAK8_pruned_massCorr;   //!
-   TBranch        *b_jetAK8_pruned_jec;   //!
-   TBranch        *b_jetAK8_pruned_jecUp;   //!
-   TBranch        *b_jetAK8_pruned_jecDown;   //!
+   TBranch        *b_jetAK8_chs_pruned_mass;   //!
+   TBranch        *b_jetAK8_chs_pruned_massCorr;   //!
+   TBranch        *b_jetAK8_chs_pruned_jec;   //!
+   TBranch        *b_jetAK8_chs_pruned_jecUp;   //!
+   TBranch        *b_jetAK8_chs_pruned_jecDown;   //!
    TBranch        *b_jetAK8_softdrop_mass;   //!
    TBranch        *b_jetAK8_softdrop_massCorr;   //!
    TBranch        *b_jetAK8_softdrop_jec;   //!
@@ -475,11 +475,11 @@ void smallify::Init(TTree *tree)
    jetAK8_tau1 = 0;
    jetAK8_tau2 = 0;
    jetAK8_tau3 = 0;
-   jetAK8_pruned_mass = 0;
-   jetAK8_pruned_massCorr = 0;
-   jetAK8_pruned_jec = 0;
-   jetAK8_pruned_jecUp = 0;
-   jetAK8_pruned_jecDown = 0;
+   jetAK8_chs_pruned_mass = 0;
+   jetAK8_chs_pruned_massCorr = 0;
+   jetAK8_chs_pruned_jec = 0;
+   jetAK8_chs_pruned_jecUp = 0;
+   jetAK8_chs_pruned_jecDown = 0;
    jetAK8_softdrop_mass = 0;
    jetAK8_softdrop_massCorr = 0;
    jetAK8_softdrop_jec = 0;
@@ -593,11 +593,11 @@ void smallify::Init(TTree *tree)
    fChain->SetBranchAddress("jetAK8_tau1", &jetAK8_tau1, &b_jetAK8_tau1);
    fChain->SetBranchAddress("jetAK8_tau2", &jetAK8_tau2, &b_jetAK8_tau2);
    fChain->SetBranchAddress("jetAK8_tau3", &jetAK8_tau3, &b_jetAK8_tau3);
-   fChain->SetBranchAddress("jetAK8_pruned_mass", &jetAK8_pruned_mass, &b_jetAK8_pruned_mass);
-   fChain->SetBranchAddress("jetAK8_pruned_massCorr", &jetAK8_pruned_massCorr, &b_jetAK8_pruned_massCorr);
-   fChain->SetBranchAddress("jetAK8_pruned_jec", &jetAK8_pruned_jec, &b_jetAK8_pruned_jec);
-   fChain->SetBranchAddress("jetAK8_pruned_jecUp", &jetAK8_pruned_jecUp, &b_jetAK8_pruned_jecUp);
-   fChain->SetBranchAddress("jetAK8_pruned_jecDown", &jetAK8_pruned_jecDown, &b_jetAK8_pruned_jecDown);
+   fChain->SetBranchAddress("jetAK8_chs_pruned_mass", &jetAK8_chs_pruned_mass, &b_jetAK8_chs_pruned_mass);
+   fChain->SetBranchAddress("jetAK8_chs_pruned_massCorr", &jetAK8_chs_pruned_massCorr, &b_jetAK8_chs_pruned_massCorr);
+   fChain->SetBranchAddress("jetAK8_chs_pruned_jec", &jetAK8_chs_pruned_jec, &b_jetAK8_chs_pruned_jec);
+   fChain->SetBranchAddress("jetAK8_chs_pruned_jecUp", &jetAK8_chs_pruned_jecUp, &b_jetAK8_chs_pruned_jecUp);
+   fChain->SetBranchAddress("jetAK8_chs_pruned_jecDown", &jetAK8_chs_pruned_jecDown, &b_jetAK8_chs_pruned_jecDown);
    fChain->SetBranchAddress("jetAK8_softdrop_mass", &jetAK8_softdrop_mass, &b_jetAK8_softdrop_mass);
    fChain->SetBranchAddress("jetAK8_softdrop_massCorr", &jetAK8_softdrop_massCorr, &b_jetAK8_softdrop_massCorr);
    fChain->SetBranchAddress("jetAK8_softdrop_jec", &jetAK8_softdrop_jec, &b_jetAK8_softdrop_jec);

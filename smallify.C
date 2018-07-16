@@ -94,16 +94,16 @@ void smallify::Loop(std::string outputFileName) {
   fChain->SetBranchStatus("jetAK8_IDTight"               , 1);
   fChain->SetBranchStatus("jetAK8_IDTightLepVeto"        , 1);
   fChain->SetBranchStatus("jetAK8_charge"                , 1);
-  fChain->SetBranchStatus("jetAK8_Hbbtag"                , 1);
+  //fChain->SetBranchStatus("jetAK8_Hbbtag"                , 1);
   fChain->SetBranchStatus("jetAK8_csv"                   , 1);
   fChain->SetBranchStatus("jetAK8_tau1"                  , 1);
   fChain->SetBranchStatus("jetAK8_tau2"                  , 1);
   fChain->SetBranchStatus("jetAK8_tau3"                  , 1);
-  fChain->SetBranchStatus("jetAK8_pruned_mass"           , 1);
-  fChain->SetBranchStatus("jetAK8_pruned_massCorr"       , 1);
-  fChain->SetBranchStatus("jetAK8_pruned_jec"            , 1);
-  fChain->SetBranchStatus("jetAK8_pruned_jecUp"          , 1);
-  fChain->SetBranchStatus("jetAK8_pruned_jecDown"        , 1);
+  fChain->SetBranchStatus("jetAK8_chs_pruned_mass"           , 1);
+  fChain->SetBranchStatus("jetAK8_chs_pruned_massCorr"       , 1);
+  fChain->SetBranchStatus("jetAK8_chs_pruned_jec"            , 1);
+  fChain->SetBranchStatus("jetAK8_chs_pruned_jecUp"          , 1);
+  fChain->SetBranchStatus("jetAK8_chs_pruned_jecDown"        , 1);
   fChain->SetBranchStatus("jetAK8_softdrop_mass"         , 1);
   fChain->SetBranchStatus("jetAK8_softdrop_massCorr"     , 1);
   fChain->SetBranchStatus("jetAK8_softdrop_jec"          , 1);
@@ -115,12 +115,15 @@ void smallify::Loop(std::string outputFileName) {
   fChain->SetBranchStatus("jetAK8_puppi_phi"               , 1);
   fChain->SetBranchStatus("jetAK8_puppi_tau1"              , 1);
   fChain->SetBranchStatus("jetAK8_puppi_tau2"              , 1);
-  fChain->SetBranchStatus("jetAK8_puppi_tau3 "             , 1);
+  fChain->SetBranchStatus("jetAK8_puppi_tau3"             , 1);
   fChain->SetBranchStatus("EVENT_event"                  , 1);
   fChain->SetBranchStatus("EVENT_run"                    , 1);
   fChain->SetBranchStatus("EVENT_lumiBlock"              , 1);
 
-  if (fChain == 0) return;
+  if (fChain == 0) {
+    cout << "WARNING: EMPTY INPUT CHAIN" << endl;
+    return;
+  }
 
   Long64_t nentries = fChain->GetEntries();
 
@@ -143,13 +146,14 @@ void smallify::Loop(std::string outputFileName) {
     if (useTriggerInfo) {
       passTrig = false;
       for(map<string,bool>::iterator it = HLT_isFired->begin(); it != HLT_isFired->end(); ++it) {
-        if (it->first == "HLT_Photon175_v1" || it->first == "HLT_Photon175_v2" ||  it->first == "HLT_Photon175_v3" || "HLT_Photon175_v4" || "HLT_Photon175_v5" ||  it->first =="HLT_Photon165_HE10_v1" ||  it->first =="HLT_Photon165_HE10_v2" ||  it->first =="HLT_Photon165_HE10_v3" || it->first =="HLT_Photon165_HE10_v4"|| it->first =="HLT_Photon165_HE10_v5")  {
+        if (it->first.find( "HLT_Photon200_v") != std::string::npos)  {
           passTrig |= (1==it->second);
         }
       }
       if (!passTrig) continue;
     }
     if (Cut(ientry) < 0) continue;
+    //cout << "passed cut" <<endl;
     skimTree->Fill();
   }
   skimFile->Write();
@@ -166,7 +170,7 @@ Int_t smallify::Cut(Long64_t entry) {
   phVec.SetPtEtaPhiE(0,0,0,0);
   jetVec.SetPtEtaPhiE(0,0,0,0);
   for(std::vector<float>::iterator it = ph_pt->begin(); it != ph_pt->end(); ++it) {
-    if (*it > 180                && 
+    if (*it > 200                && 
         ( (ph_mvaCat->at(iPh)==0 && ph_mvaVal->at(iPh)>0.20) || 
           (ph_mvaCat->at(iPh)==1 && ph_mvaVal->at(iPh)>0.20) 
         )                        && 
@@ -179,10 +183,10 @@ Int_t smallify::Cut(Long64_t entry) {
 
       iJet = 0;
       for(std::vector<float>::iterator jt = jetAK8_pt->begin(); jt != jetAK8_pt->end(); ++jt) {
-      //TODO: Add jet eta cut???  
+        //cout << "printing cut Vars:\nph_mvaVal: " << to_string(ph_mvaVal->at(iPh)) << "\nph_passEleVeto: " << to_string(ph_passEleVeto->at(iPh)) << "jet loose id" << to_string(jetAK8_IDLoose->at(iJet)) << endl;
 	if ( *jt > 180                             && 
-            jetAK8_IDLoose->at(iJet)   //            &&
-            //jetAK8_pruned_massCorr->at(iJet) > 30 
+            jetAK8_IDLoose->at(iJet)        //       &&
+            //jetAK8_chs_pruned_massCorr->at(iJet) > 20 
            ) {
           passJet = true;
           jetVec.SetPtEtaPhiE(jetAK8_pt->at(iJet), jetAK8_eta->at(iJet), jetAK8_phi->at(iJet), jetAK8_e->at(iJet));
