@@ -133,7 +133,6 @@ void smallify::Loop(std::string outputFileName) {
   dir->cd();
   TTree* skimTree = fChain->CloneTree(0);
 
-
   for (Long64_t jentry=0; jentry<nentries;++jentry) {
     if (stopAfter==jentry) break;
     Long64_t ientry = LoadTree(jentry);
@@ -155,6 +154,7 @@ void smallify::Loop(std::string outputFileName) {
     if (Cut(ientry) < 0) continue;
     //cout << "passed cut" <<endl;
     skimTree->Fill();
+
   }
   skimFile->Write();
   skimFile->Close();
@@ -170,9 +170,11 @@ Int_t smallify::Cut(Long64_t entry) {
   phVec.SetPtEtaPhiE(0,0,0,0);
   jetVec.SetPtEtaPhiE(0,0,0,0);
   for(std::vector<float>::iterator it = ph_pt->begin(); it != ph_pt->end(); ++it) {
+    //cat 1 is endcap; cat 0 is barrel
+    //mvaVals taken from https://twiki.cern.ch/twiki/bin/viewauth/CMS/MultivariatePhotonIdentificationRun2
     if (*it > 200                && 
-        ( (ph_mvaCat->at(iPh)==0 && ph_mvaVal->at(iPh)>0.20) || 
-          (ph_mvaCat->at(iPh)==1 && ph_mvaVal->at(iPh)>0.20) 
+        ( (ph_mvaCat->at(iPh)==0 && ph_mvaVal->at(iPh)>0.27) || 
+          (ph_mvaCat->at(iPh)==1 && ph_mvaVal->at(iPh)>0.14) 
         )                        && 
         ph_passEleVeto->at(iPh)  &&
         std::abs(ph_eta->at(iPh)) < 2.4
